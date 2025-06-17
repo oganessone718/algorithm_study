@@ -7,19 +7,23 @@ k -= 5
 
 if k < 0:
   print(0)
-  exit()
+  sys.exit()
 
 used_char_set = set()
 essential_char_set = {'a', 'n', 't', 'i', 'c'}
 word_list = []
 for _ in range(n):
   word = set(sys.stdin.readline().rstrip())-essential_char_set
+  if len(word) > k:
+    continue
   word_list.append(word)
   used_char_set.update(word)
 
+n = len(word_list)
+
 if len(used_char_set) <= k:
   print(n)
-  exit()
+  sys.exit()
 
 char_combinations = combinations(used_char_set, k)
 
@@ -33,7 +37,7 @@ for char_combination in char_combinations:
       max_local+=1
   if max_local == n:
     print(n)
-    exit()
+    sys.exit()
   if max_local > max_global:
     max_global = max_local
 
